@@ -10,7 +10,8 @@ To see this template in action, check out the [Pålegg GitHub](https://github.co
 
 1) Fork/clone this repo
 ```
-git clone https://github.com/ecker00/snuti-php-boilerplate.git
+git clone https://github.com/ecker00/snuti-php-boilerplate.git your-project-name
+cd your-project-name
 ```
 
 2) Install PHP dependencies (requires [composer](https://getcomposer.org)):
@@ -26,6 +27,7 @@ npm install
 
 4) Start Grunt to generate nessecary files (On Mac, the Grunt file needs to be slightly changed, see mac related notes in Gruntfile.js)
 ```
+echo 1 > _tmp/version.txt
 grunt build
 grunt
 ```
