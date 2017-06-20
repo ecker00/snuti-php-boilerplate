@@ -8,7 +8,6 @@ require_once('api.php');
 // Dependencies:
 // ezSQL - https://github.com/ezSQL/ezSQL (MySQL wrapper)
 // lightncandy - https://github.com/zordius/lightncandy (Handlebars rendering)
-// Bulletproof – https://github.com/samayo/bulletproof (Image uploader)
 
 class App {
 	public $db;
@@ -22,16 +21,12 @@ class App {
 		
 		// Setup database
 		// –––––––––––––––––––––––––––––––––––––––––––––––––– //
+		// This section is optional if your ather want to build the database structure manually
 		$dbStructure = [
-			'palegg' => [ # Database name
-				'meals' => [ # Table name
-					'mealID'      => 'mealID INT AUTO_INCREMENT', # Primary key first
-					'title'       => 'title VARCHAR(255) NOT NULL',
-					'description' => 'description TEXT NOT NULL',
-					'author'      => 'author VARCHAR(255) NOT NULL',
-					'image'       => 'image VARCHAR(255) NOT NULL',
-					'votes'       => 'votes INT DEFAULT 0',
-					'time'        => 'time TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+			'exampleDB' => [ # Database name
+				'exampleTable' => [ # Table name
+					'exampleID' => 'exampleID INT AUTO_INCREMENT', # Primary key first
+					'number'    => 'number INT DEFAULT 0',
 				],
 			],
 		];
@@ -39,17 +34,18 @@ class App {
 		$testDB->hashFile = '../_tmp/databaseHash.txt';
 		$testDB->checkStructure(); // Initalises DB as described above
 		$testDB->conn->close();
+		
 		// After DB is setup, re-connect
 		$this->db = new ezSQL_mysql('root','','palegg','localhost');
 		
+		// Setup the API
 		$this->api = new API($this->db);
 		if ($this->api->isAjax) return; // Don't render the rest, if it's an Ajax call
+		
 		// Pages
 		// –––––––––––––––––––––––––––––––––––––––––––––––––– //
   	$this->pages = [ // Each key is a url target
-			'home'   => ['name'=>'home',   'title'=>'Lunch love',        'hbs'=>'home-main',    'api'=>['getMeals'=>[]]],
-			'create' => ['name'=>'create', 'title'=>'Create a new meal', 'hbs'=>'newMeal-main', 'api'=>[]],
-			'about'  => ['name'=>'about',  'title'=>'About',             'hbs'=>'about-main',   'api'=>[]],
+			'home' => ['name'=>'home', 'title'=>'Your project', 'hbs'=>'home-main', 'api'=>['getVisits'=>[]]],
 		];
 		$this->page = $this->pages['home']; // Default page
 		
@@ -77,7 +73,6 @@ class App {
 			'postResult' => $this->api->postResult,
 			'currentPage' => $this->page,
 			'version' => $this->version,
-			'year' => date('Y'),
 		];
 		$this->hbs = new HBS($defaultData);
 		$this->hbs->compileDir = './../_hbs/';
@@ -87,52 +82,5 @@ class App {
   
 }
 
+// Run
 $app = new App();
-
-// -------------------- Database -------------------- //
-#$db = new mysqli('localhost', 'root', '');
-#if ($db->connect_error) {
-#  l("DB connection failed: ", $db->connect_error);
-#  exit;
-#}
-
-
-
-
-
-
-// -------------------- Routing -------------------- //
-// API request
-#if (isset($_GET['api'])) {
-#	require("api.php");
-#	return;
-#
-#// Page request
-#} else {
-#    $page = 'home';
-#}
-
-
-// -------------------- Rendering -------------------- //
-
-#$meals = $db->query("SELECT * FROM meals");
-$meals = [
-	['title'=>'Salmon burger', 'ingredients'=>[['name'=>'ham', 'color'=>'pink'],['name'=>'tomato', 'color'=>'lightblue']], 'description'=>'This is how you make it', 'author'=>'Bobzomator'],
-	['title'=>'Jam toasty', 'ingredients'=>[['name'=>'bread', 'color'=>'salmon'],['name'=>'Strawberry jam', 'color'=>'lightblue'],['name'=>'Lettuce', 'color'=>'lightgreen']], 'description'=>'This is how you make it2', 'author'=>'Food Mage 98'],
-	['title'=>'Jam toasty2', 'ingredients'=>[['name'=>'bread', 'color'=>'salmon'],['name'=>'Strawberry jam', 'color'=>'lightblue'],['name'=>'Lettuce', 'color'=>'lightgreen']], 'description'=>'This is how you make it2', 'author'=>'Food Mage 98'],
-];
-$colors = [
-	'LightBlue',
-	'DarkSeaGreen','SeaGreen','OliveDrab','Olive','LimeGreen','LightGreen',
-	'OrangeRed','Orange','SandyBrown','DarkSalmon','Salmon','LightSalmon','PaleVioletRed','LightPink',
-	'RosyBrown','Bisque','Beige','PeachPuff','Cornsilk','Khaki',
-];
-$data = [
-	'showForm' => isset($_GET['new']),
-	'version' => $version,
-	'meals'  => $meals,
-	'colors' => $colors,
-];
-
-#echo HBS::render('index', $data);
-#echo 'Hello world';

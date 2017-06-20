@@ -1,6 +1,6 @@
 <?php
 
-// A MySQL Database wrapper
+// MySQL Database quick create and alter
 // –––––––––––––––––––––––––––––––––––––––––––––––––– //
 // Automatically creates and alters databases, tables and columns
 
@@ -63,22 +63,7 @@ class dbSetup {
     fclose($hashFile);
   }
   
-  #public function prepare($sql) {
-  #  return $this->conn->prepare($sql);
-  #}
-  
-  public function query($sql) { #, $input=[]) {
-    #$result = $this->conn->prepare($sql);
-    #if (count($input) > 0) {
-    #  $result->bind_param($valType,$val);
-    #  #foreach ($input as $val) {
-    #  #  $valType = 's';
-    #  #}
-    #}
-    #$result->execute();
-    #$result->bind_result($input);
-    #l($result, $input);
-    #$result = $results;
+  public function query($sql) {
     $result = $this->conn->query($sql);
     if ($this->conn->error) {
       try {

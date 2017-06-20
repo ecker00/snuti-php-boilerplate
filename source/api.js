@@ -15,7 +15,6 @@ api.query = function (queries, loadingCancel) {
       var targetID = loadingCancel();
     // Check for API errors
     for (var key in data) {
-      //  throw 'API returned null for '+key;
       if (data[key] && data[key]['error']) {
         if (loadingCancel)
           $('[data-hbs="'+targetID+'"]').html( HBS['error'](data[key]) );

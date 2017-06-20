@@ -165,30 +165,7 @@ Handlebars.registerHelper('toParagraph', function(str, context) {
 // –––––––––––––––––––––––––––––––––––––––––––––––––– //
 // Handlebars extended functionality
 // –––––––––––––––––––––––––––––––––––––––––––––––––– //
-/*
-// Restore ajax data between pageloads
-// Note: Useful for search results
-HBS.restoreCache = function( tag ) {
-  var searchCache = $('input[data-cache="'+tag+'"]').val();
-  if (searchCache) {
-    var data = JSON.parse(searchCache);
-    HBS.render(tag, data);
-  }
-}
 
-// Generic button wrapper
-HBS.button = function( btnID, targetID, structure, alert ) {
-  HBS.bind('[data-btn="'+btnID+'"]', 'click', function() {
-    var loadingCancel = HBS.setLoading(targetID)
-    rgAPI.query('set', structure(this))
-      .done(function( data ) {
-        for (var key in data) break; // First key
-        loadingCancel();
-        HBS.render(targetID, data[key]);
-      });
-  });
-}
-*/
 // Loading timeout display
 HBS.setLoading = function( targetID, loadingStyle ) {
   loadingStyle = (typeof loadingStyle !== 'undefined')?  loadingStyle:'loading';

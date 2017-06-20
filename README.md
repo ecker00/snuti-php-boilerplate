@@ -30,10 +30,12 @@ composer install
   ```
   sudo nano /etc/apache2/sites-available/001-cloud9.conf
   ```
-  Change 'DocumentRoot' to point to the `live` folder in your project.
+  Change 'DocumentRoot' to point to the **live** folder in your project.
   ```
   DocumentRoot /home/ubuntu/workspace/[your-project-name]/live
   ```
+
+5) Start / restart your webserver
 
 ---
 
@@ -41,7 +43,6 @@ composer install
 
 - **Cloud9 with a PHP & Apache container:**
 
-  To see the PHP console run the following command in a terminal window
   ```
   tail -f /home/ubuntu/lib/apache2/log/error.log
   ```
