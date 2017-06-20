@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       }
     },
     shell: { // Split handlebar templates using "save: myFilename.hbs" lines
-      handlebarsSplit: { // Note: On mac, change 'csplit' to 'gcsplit' and run "brew install coreutils" for it to work
+      handlebarsSplit: { // Note: On mac, change 'csplit' to 'gcsplit' and run "brew install coreutils" if gcsplit is not installed on the system
         command: "rm -f _hbs/*.hbs & for file in page*/*.hbs; do csplit -z -f \"_hbs/hbsSplit_$(basename $file)\" $file '/saveAs:/' '{*}'; done;"
       },
       handlebarsRename: { // Note: space is the delimeter

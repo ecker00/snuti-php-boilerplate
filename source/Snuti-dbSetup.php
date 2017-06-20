@@ -12,7 +12,7 @@ class dbSetup {
   public $conn;
   public $structure;
   public $hashFile = 'databaseHash.txt';
-  function __construct($host, $user, $password, $structure) {
+  function __construct($user, $password, $structure, $host) {
     if (!$structure || !count($structure)) { l('No structure specified'); return; }
     if (!$host) { l('No host specified'); return; }
     if (!$user) { l('No user specified'); return; }

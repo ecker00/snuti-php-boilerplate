@@ -50,12 +50,12 @@ function l() {
 	$time = date('H:i'); // :s
 	$str .= " \033[90m«{$time}» line $line ➢ $func() ➢ $file \033[0m"; #  ➡ line $line2 in $file2
 	$str .= PHP_EOL;
-	if (false) { // Used for a Docker config
+	if (getenv('IS_DOCKER')) { // Output logs to Docker stdout
 		$stderr = fopen('php://stdout', 'w+');
   	fwrite($stderr, $str);
   	fclose($stderr);
 	} else {
-		error_log($str, 3, '/home/ubuntu/lib/apache2/log/error.log'); #  Change this path as needed
+		error_log($str, 3);
 	}
 }
 

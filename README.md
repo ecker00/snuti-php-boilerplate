@@ -13,18 +13,24 @@ To see this template in action, check out the [Pålegg GitHub](https://github.co
 git clone https://github.com/ecker00/snuti-php-boilerplate.git
 ```
 
-2) Setup Grunt task manager (requires [node](https://nodejs.org), [npm](https://www.npmjs.com/get-npm)):
-```
-npm install -g grunt-cli
-npm install
-```
-
-3) Install dependencies (requires [composer](https://getcomposer.org)):
+2) Install PHP dependencies (requires [composer](https://getcomposer.org)):
 ```
 composer install
 ```
 
-4) Configure your webserver:
+3) Install Grunt dependencies (requires [node](https://nodejs.org), [npm](https://www.npmjs.com/get-npm)):
+```
+npm install -g grunt-cli # If grunt is not installed globaly yet
+npm install
+```
+
+4) Start Grunt to generate nessecary files (On Mac, the Grunt file needs to be slightly changed, see mac related notes in Gruntfile.js)
+```
+grunt build
+grunt
+```
+
+5) Configure your webserver:
 
 - **Cloud9 with a PHP & Apache container:**
   ```
@@ -35,7 +41,7 @@ composer install
   DocumentRoot /home/ubuntu/workspace/[your-project-name]/live
   ```
 
-5) Start / restart your webserver
+6) Start / restart your webserver
 
 ---
 

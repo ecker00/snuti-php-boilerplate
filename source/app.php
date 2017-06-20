@@ -30,13 +30,17 @@ class App {
 				],
 			],
 		];
-		$testDB = new dbSetup('localhost', 'root', '', $dbStructure);
+		$dbHost = getenv('DB_HOST')?: 'localhost';
+		$dbName = getenv('DB_NAME')?: 'exampleDB';
+		$dbUser = getenv('DB_USER')?: 'root';
+		$dbPass = getenv('DB_PASS')?: '';
+		$testDB = new dbSetup($dbUser, $dbPass, $dbStructure, $dbHost);
 		$testDB->hashFile = '../_tmp/databaseHash.txt';
 		$testDB->checkStructure(); // Initalises DB as described above
 		$testDB->conn->close();
 		
 		// After DB is setup, re-connect
-		$this->db = new ezSQL_mysql('root','','exampleDB','localhost');
+		$this->db = new ezSQL_mysqli($dbUser, $dbPass, $dbName, $dbHost);
 		
 		// Setup the API
 		$this->api = new API($this->db);
