@@ -1,0 +1,22 @@
+{
+  "name": "snuti-boilerplate",
+  "version": "1.0.0",
+  "description": "A little project boilerplate.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christer Eckermann",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-autoprefixer": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-handlebars": "latest",
+    "grunt-sass": "latest",
+    "grunt-shell": "latest"
+  },
+  "dependencies": {}
+}

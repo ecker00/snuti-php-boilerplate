@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Roboto+Slab');
+
+// Removes unit shuffix from value '100px -> 100'
+// Ref: https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// Scale property value between min-to-max
+// Note: Only works with 'px' values
+// Inspired by: https://madebymike.com.au/writing/precise-control-responsive-typography/
+@mixin lerp($property, $minPx, $maxPx, $widthMinPx, $widthMaxPx) {
+	$widthMin: strip-unit($widthMinPx);
+	$widthMax: strip-unit($widthMaxPx);
+	$min: strip-unit($minPx);
+	$max: strip-unit($maxPx);
+	#{$property}: calc( #{$minPx} + (#{$max} - #{$min}) * ( (100vw - #{$widthMinPx}) / ( #{$widthMax} - #{$widthMin}) ));
+	@media (max-width: #{$widthMinPx}) { #{$property}: #{$minPx}; }
+	@media (min-width: #{$widthMaxPx}) { #{$property}: #{$maxPx}; }
+}
+
+// Colours
+$c-peach: hsl(17, 100%, 74%);
+$c-cyan: hsl(192, 58%, 36%);
+
+html {
+	box-sizing: border-box;
+	overflow-x: hidden;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+	background: $c-peach;
+	height: 100vh;
+	margin: 0;
+	//& * {
+		color: white;
+		font-family: "Roboto Slab";
+		@include lerp('font-size', 16px, 20px, 320px, 800px);
+	  line-height: 150%;
+	//}
+}
+
+header {
+	background: linear-gradient(lighten($c-peach, 10%), $c-peach);
+}
+
+nav {
+  padding-top: 0.5em;
+	text-align: center;
+	a {
+		display: inline-block;
+  	padding: 0.5em 1em;
+		text-align: center;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+		&.active{ opacity: 0.6; }
+		&:hover, &:focus {
+			opacity: 1;
+			text-shadow: 0 0 1em rgba(0,0,0,0.35);
+		}
+	}
+}
+
+a, 
+a:link,
+a:visited,
+a:active {
+	color: currentColor;
+}
+a:hover,
+a:focus {
+	opacity: 0.8;
+  text-decoration: underline;
+}
+
+.content {
+	color: $c-cyan;
+	width: 100%;
+	margin: 2em auto;
+	padding: 1em;
+	background: hsla(0, 0%, 100%, 0.9);
+	border-top:    0.3em solid fade-out($c-peach, 0.5);
+	border-bottom: 0.3em solid fade-out($c-peach, 0.5);
+}
+
+footer {
+	font-family: 'Pacifico';
+	font-size: 1.4em;
+	text-align: center;
+	filter: opacity(0.5); // Used this approach because the font is overlapping, making the faded colour uneven.
+	a { text-decoration: none; }
+}
+
+.logo {
+	text-align: center;
+	font-family:"Pacifico";
+	margin: 0.7em 0 1em;
+	@include lerp('font-size', 50px, 80px, 320px, 800px);
+	transform: rotate(-10deg);
+  text-shadow: 2px 4px hsla(0,0%,100%,0.4);
+	color: white;
+}
+
+h1, h2 {
+	text-align: center;
+	font-family:"Pacifico";
+  text-shadow: 0.05em 0.1em rgba(0,0,0,0.2);
+  line-height: 150%;
+}
+h1 { font-size: 3em; }
+h2 { font-size: 2em; }
+
+button, .button {
+	display: block;
+  position: relative;
+  overflow: hidden;
+	margin: 0 auto;
+  padding: 0.3em 1em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+	font-family: "Roboto Slab";
+	font-size: 1em;
+  color: white !important;
+	border: none;
+	border-radius: 1.2em;
+	background: $c-peach;
+  @include lerp('width', 250px, 450px, 320px, 800px);
+	&:hover, &:focus { background: lighten($c-peach, 5%); }
+	&:active         { background: darken($c-peach, 5%); }
+	&.fit { display: inline; }
+}
+
+.error {
+  @include lerp('width', 250px, 450px, 320px, 800px);
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 1em;
+  background: #ff8888;
+	color: #3c1515;
+}
+
+.text-wrap {
+  @include lerp('width', 250px, 450px, 320px, 800px);
+  text-align: center;
+  margin: 0 auto;
+}
+
+.text-center {
+	text-align: center;
+}

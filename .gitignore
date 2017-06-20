@@ -1,0 +1,6 @@
+/_tmp/*
+/vendor
+/node_modules
+/_hbs/*
+/live/uploads/*
+php_errors.log

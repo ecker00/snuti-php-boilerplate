@@ -1,0 +1,49 @@
+––––––––––saveAs: template.hbs
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pålegg – {{currentPage.title}}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fun little side project">
+		<meta name="keywords" content="lunch ideas,spread, pålegg">
+		<meta name="description" content="The website for sharing your lunch making ideas">
+    <link rel="stylesheet" href="/style.css?v={{version}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cssgram/0.1.10/cssgram.min.css">
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.runtime.min.js"></script>
+    <script src="/script.js?v={{version}}"></script>
+    <script>HBS.defaultData = {{{defaultData}}}</script>
+  </head>
+  
+  <body>
+    <header>
+      <nav>
+        <a {{#logic currentPage.name '==' 'home' }} class="active"{{/logic}} href="/">Lunches</a>
+        <a {{#logic currentPage.name '==' 'create'}}class="active"{{/logic}} href="/?create">Create</a>
+        <a {{#logic currentPage.name '==' 'about' }}class="active"{{/logic}} href="/?about">About</a>
+      </nav>
+      <h1 class="logo">Pålegg</h1>
+    </header>
+    {{{include currentPage.hbs}}}
+		<footer>
+			<a href="https://snuti.net/" target="_blank">Snuti.net</a>
+		</footer>
+  </body>
+</html>
+
+––––––––––saveAs: error.hbs
+<div class="error">
+  {{#if this}}
+    {{{this}}}
+  {{else}}
+    Sorry, something went wrong.
+    <a href="javascript:location.reload();">Reload?</a>
+  {{/if}}
+</div>
+
+––––––––––saveAs: loading.hbs
+<div class="loading">
+  <img class="heart" src="img/loading.svg">
+  Loading…
+</div>

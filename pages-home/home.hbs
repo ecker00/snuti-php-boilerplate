@@ -1,0 +1,39 @@
+––––––––––saveAs: home-main.hbs
+<p class="text-wrap">
+	This is the place to visit when your feeling hangry
+	and you're wondering what to make for lunch!
+</p>
+<div class="content meals" data-target="meals">
+  {{#each getMeals.items}}
+    {{>home-meal}}
+  {{/each}}
+  {{#if getMeals.next}}
+    {{>home-loadMore}}
+  {{/if}}
+</div>
+
+––––––––––saveAs: home-meal.hbs
+<div class="meal">
+  <div class="backSide" style="display: none;">
+    {{{toParagraph description}}}
+  </div>
+  <div class="frontSide">
+    <figure class="imageWrap mayfair" style="background-image:url(/uploads/{{image}})">
+      <h2>{{title}}</h2>
+    </figure>
+  </div>
+  <div class="details" data-hbs="home-mealDetails#{{mealID}}" data-mealID="{{mealID}}">
+    {{>home-mealDetails}}
+  </div>
+</div>
+
+––––––––––saveAs: home-mealDetails.hbs
+<span class="author">By {{author}}</span>
+<span class="votes">{{votes}}</span>
+<img class="heart {{#if voted}}voted{{/if}}" src="img/heart.svg" data-btn="vote">
+
+––––––––––saveAs: home-loadMore.hbs
+<div class="loadMore" style="opacity: 0;" data-event="loadMore">
+  <img src="/img/loading.svg">
+  <h2 style="margin: 0;">Loading…</h2>
+</div>

@@ -1,0 +1,9 @@
+{
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "samayo/bulletproof": "2.0.*",
+        "zordius/lightncandy": "dev-master",
+        "jv2222/ezsql": "dev-master"
+    }
+}
