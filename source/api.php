@@ -13,8 +13,6 @@ class API {
   function __construct($db) {
     $this->isAjax = (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')? true:false;
     $this->db = $db;
-    l($this->isAjax, $_POST);
-    
     // Handle onLoad API calls (for Ajax and HTML post)
     if ($_POST['api']) {
       if (is_array($_POST['api']))
