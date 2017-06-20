@@ -13,6 +13,7 @@ class API {
   function __construct($db) {
     $this->isAjax = (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')? true:false;
     $this->db = $db;
+    l($this->isAjax, $_POST);
     
     // Handle onLoad API calls (for Ajax and HTML post)
     if ($_POST['api']) {
@@ -46,18 +47,14 @@ class API {
     return $results;
   }
   
-  // Example: This API call count the number of page loads
+  // Example: This API call count the number of calls to itself
   private function method_example($input = []) {
-    // Increment number by 1
-    $result = $this->db->query("
-      UPDATE exampleTable 
-      SET number = number + 1
-      WHERE exampleID = 1");
-    // Get new number
-    $number = (int) $this->db->get_var(
-      "SELECT number
-      FROM exampleTable
-      WHERE exampleID = 1", ARRAY_A);
+    // Get number
+    $number = (int) $this->db->get_var("SELECT number FROM exampleTable");
+    if (!$number) $this->db->query("INSERT INTO exampleTable (number) VALUES (1)"); // Create row
+    // Save new number
+    $number += 1;
+    $this->db->query("UPDATE exampleTable SET number = $number WHERE exampleID = 1");
     return $number;
   }
 }

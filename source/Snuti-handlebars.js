@@ -38,6 +38,8 @@ HBS.append = function( tag, data, target ) {
 };
 
 // Bind all interactive functions
+// :: HBS.bind is similar to jQuery's $().on() function, but will
+// :: always rebind itself after a partial have been re-rendered
 HBS.events = [];
 HBS.bind = function(selector, action, callback) {
   HBS.events.push({
@@ -118,8 +120,8 @@ Handlebars.registerHelper('concat', function() {
 });
 
 // Multi-dimensional lookup helper
-// Diving into specific numeric indexes with children keys can be impossible and messy in handlebars.
-// With this approach you do: {{deepLookup inputArray key1 key2 key3...}}
+// :: Diving into specific numeric indexes with children keys can be impossible and messy in handlebars.
+// :: With this approach you do: {{deepLookup inputArray key1 key2 key3...}}
 Handlebars.registerHelper('deepLookup', function() {
   var keys = []; // Extract arguments
   for(var i=0; i<arguments.length; i++){

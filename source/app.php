@@ -36,7 +36,7 @@ class App {
 		$testDB->conn->close();
 		
 		// After DB is setup, re-connect
-		$this->db = new ezSQL_mysql('root','','palegg','localhost');
+		$this->db = new ezSQL_mysql('root','','exampleDB','localhost');
 		
 		// Setup the API
 		$this->api = new API($this->db);
@@ -45,7 +45,7 @@ class App {
 		// Pages
 		// –––––––––––––––––––––––––––––––––––––––––––––––––– //
   	$this->pages = [ // Each key is a url target
-			'home' => ['name'=>'home', 'title'=>'Your project', 'hbs'=>'home-main', 'api'=>['getVisits'=>[]]],
+			'home' => ['name'=>'home', 'title'=>'Your project', 'hbs'=>'home-main', 'api'=>['example'=>[]]],
 		];
 		$this->page = $this->pages['home']; // Default page
 		
@@ -73,6 +73,7 @@ class App {
 			'postResult' => $this->api->postResult,
 			'currentPage' => $this->page,
 			'version' => $this->version,
+			'year' => date('Y'),
 		];
 		$this->hbs = new HBS($defaultData);
 		$this->hbs->compileDir = './../_hbs/';
