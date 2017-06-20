@@ -55,7 +55,7 @@ function l() {
   	fwrite($stderr, $str);
   	fclose($stderr);
 	} else {
-		error_log($str, 3);
+		error_log($str, 3, ini_get('error_log'));
 	}
 }
 

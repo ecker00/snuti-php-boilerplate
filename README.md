@@ -52,7 +52,7 @@ grunt
 - **Cloud9 with a PHP & Apache container:**
 
   ```
-  tail -f /home/ubuntu/lib/apache2/log/error.log
+  tail -f [path-to-your-project]/php_errors.log
   ```
 
 ---
