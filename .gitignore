@@ -1,6 +1,19 @@
-/_tmp/*
-/vendor
-/node_modules
-/_hbs/*
-/live/uploads/*
+**/.DS_Store
+
+# Apache default error location (Cloud9)
 php_errors.log
+
+# Exclude dependencies
+/node_modules
+/vendor
+
+# Exclude compiled files
+/_tmp/*
+/_hbs/*
+/live/script.js
+/live/script.js.map
+/live/style.css
+/live/style.css.map
+
+# Exclude uploads
+/live/uploads/*
